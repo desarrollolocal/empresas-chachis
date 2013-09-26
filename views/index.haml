@@ -1,0 +1,15 @@
+!!!
+%html
+  %head
+  %body
+    %h1 Empresas Chachis
+
+    %ul
+      - @companies.each do |company|
+        %li
+          %span= "Nombre #{company[:name]}"
+          %span= "Direccion #{company[:address]}"
+          %span= "Web #{company[:website]}"
+          %img{:src=>company[:logo], :alt=>company[:logo]}
+          %span= "email #{company[:email]}"
+
