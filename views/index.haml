@@ -6,7 +6,7 @@
 
     %ul
       - @companies.each do |company|
-        %li
+        %li.company
           %span= "Nombre #{company[:name]}"
           %span= "Direccion #{company[:address]}"
           %span= "Web #{company[:website]}"

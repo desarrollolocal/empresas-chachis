@@ -13,7 +13,7 @@ class MyApp < Sinatra::Base
       :logo => "http://valencia.jpg", :email => 'hello@valencia.es' }
     ]
 
-    haml :index
+    haml :index, :format => :html5
   end
 
 end

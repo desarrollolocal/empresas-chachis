@@ -1,17 +1,18 @@
 require_relative '../../app'
-require 'rack/test'
 require 'rspec'
+require 'capybara'
 
 describe "/" do
-  include Rack::Test::Methods
+  include Capybara::DSL
 
-  	def app
-		MyApp.new
-	end
+  	before do
+	    Capybara.app = MyApp.new
+  	end
 
-	it "returns a response" do
-	    get '/'
-	    last_response.body.should include('Hello World')
+	it "shows all the companies" do
+		expected_companies = 3
+		visit '/'
+	    page.all('.company').count.should eql expected_companies
 	end
 
 end
