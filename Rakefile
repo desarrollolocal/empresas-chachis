@@ -21,10 +21,17 @@ namespace :test do
 	    t.rspec_opts = " -c"
 	end
 
+	desc "Run persistence tests"
+	RSpec::Core::RakeTask.new(:persistence) do |t|
+	    t.pattern = "test/persistence/*.rb"
+	    t.rspec_opts = " -c"
+	end
+
 	desc "Run all tests"
 	task :all do
 		Rake::Task['test:domain'].execute
 		Rake::Task['test:routes'].execute
+		Rake::Task['test:persistence'].execute
 	end
 
 end
