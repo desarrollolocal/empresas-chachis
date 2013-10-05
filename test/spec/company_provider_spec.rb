@@ -20,8 +20,13 @@ describe 'CompanyProvider' do
     @collection.should_receive('find').and_return(database_rows)
 
     companies = @company_provider.find_all
+  end
 
-    expect(companies.count).to be 3
+  it 'filters hiring companies' do
+    hiring_companies = [{}, {}]
+    @collection.should_receive('find').with({ "hiring" => true }).and_return(hiring_companies);
+
+    companies = @company_provider.find_hiring
   end
 
 end

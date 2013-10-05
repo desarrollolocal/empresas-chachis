@@ -7,9 +7,9 @@
     %ul
       - @companies.each do |company|
         %li.company
-          %span= "Nombre #{company[:name]}"
-          %span= "Direccion #{company[:address]}"
-          %span= "Web #{company[:website]}"
-          %img{:src=>company[:logo], :alt=>company[:logo]}
-          %span= "email #{company[:email]}"
+          %span= "Nombre #{company['name']}"
+          %span= "Direccion #{company['address']}"
+          %span= "Web #{company['website']}"
+          %img{:src=>company['logo'], :alt=>company['logo']}
+          %span= "email #{company['email']}"
 

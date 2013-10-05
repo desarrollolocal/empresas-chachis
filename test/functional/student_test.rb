@@ -19,7 +19,7 @@ describe "Empresas chachis" do
     @database.collection("companies").drop
   end
 
-  it "shows all the companies" do
+  it "shows all the companies hiring currently" do
     expected_companies = 3
     expected_companies.times do |i| create_company(i) end
 
@@ -31,7 +31,7 @@ describe "Empresas chachis" do
   private
 
   def create_company (name)
-    @companies_collection.insert({ :name => "Company #{name}"})
+    @companies_collection.insert({ "name" => "Company #{name}", "hiring" => true })
   end
 
 end

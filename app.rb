@@ -16,7 +16,7 @@ class MyApp < Sinatra::Base
 
   get '/' do
     provider  = CompanyProvider.new(settings.mongo_db)
-    @companies = provider.find_all
+    @companies = provider.find_hiring
 
     haml :index, :format => :html5
   end
