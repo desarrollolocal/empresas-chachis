@@ -7,6 +7,11 @@ task :serverup do
 	system "rackup -p 3000"
 end
 
+desc "Seed database"
+task :seed do
+	system "ruby test/fixtures/company.rb"
+end
+
 namespace :test do
 
 	desc "Run functional tests"

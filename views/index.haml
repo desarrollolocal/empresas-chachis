@@ -5,11 +5,14 @@
     %h1 Empresas Chachis
 
     %ul
-      - @companies.each do |company|
+      - companies.each do |company|
         %li.company
           %span= "Nombre #{company['name']}"
           %span= "Direccion #{company['address']}"
           %span= "Web #{company['website']}"
-          %img{:src=>company['logo'], :alt=>company['logo']}
+          %img{:src => company['logo'], :alt => company['logo']}
           %span= "email #{company['email']}"
+          %ul
+            - company['keywords'].each do |keyword|
+              %li.tag= keyword
 

@@ -28,10 +28,24 @@ describe "Empresas chachis" do
     page.all('.company').count.should eql expected_companies
   end
 
+  it "shows companies keywords" do
+    keywords = ["Ruby", "Sinatra"]
+    company = create_company_with_keyword(keywords)
+
+    visit '/'
+
+    page.all('.company .tag').count.should eql keywords.count
+  end
+
+
   private
 
   def create_company (name)
-    @companies_collection.insert({ "name" => "Company #{name}", "hiring" => true })
+    @companies_collection.insert({ "name" => "Company #{name}", "hiring" => true , "keywords" => [] })
+  end
+
+  def create_company_with_keyword(keywords)
+    @companies_collection.insert({ "name" => "Company name", "hiring" => true, "keywords" => keywords })
   end
 
 end
