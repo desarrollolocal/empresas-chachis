@@ -29,4 +29,11 @@ describe 'CompanyProvider' do
     companies = @company_provider.find_hiring
   end
 
+  it 'filters hiring companies by keyword' do
+    keyword = 'ruby'
+    hiring_companies = [{}, {}]
+    @collection.should_receive('find').with({ "hiring" => true, "keywords" => /^#{keyword}$/i }).and_return(hiring_companies);
+
+    companies = @company_provider.find_hiring(keyword)
+  end
 end

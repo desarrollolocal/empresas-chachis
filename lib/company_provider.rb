@@ -11,8 +11,11 @@ class CompanyProvider
     end
   end
 
-  def find_hiring
-    @collection.find({ "hiring" => true }).to_a.each do |attributes|
+  def find_hiring(keyword = nil)
+    filters = { "hiring" => true }
+    filters["keywords"] = /^#{keyword}$/i unless keyword.nil?
+
+    @collection.find(filters).to_a.each do |attributes|
       build_new_company(attributes)
     end
   end

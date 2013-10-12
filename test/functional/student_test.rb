@@ -12,11 +12,8 @@ describe "Empresas chachis" do
   before do
     Capybara.app = MyApp.new
     @database = MongoClient.new("localhost", 27017).db("empresaschachis_test")
-    @companies_collection = @database.collection("companies")
-  end
-
-  after do
     @database.collection("companies").drop
+    @companies_collection = @database.collection("companies")
   end
 
   it "shows all the companies hiring currently" do
@@ -30,13 +27,22 @@ describe "Empresas chachis" do
 
   it "shows companies keywords" do
     keywords = ["Ruby", "Sinatra"]
-    company = create_company_with_keyword(keywords)
+    create_company_with_keyword(keywords)
 
     visit '/'
 
     page.all('.company .tag').count.should eql keywords.count
   end
 
+  it "filter companies by keyword" do
+    expected_companies = 1
+    create_company_with_keyword(["Ruby", "Sinatra"])
+    create_company_with_keyword(["PHP", "Symfony"])
+
+    visit '/?keyword=ruby'
+
+    page.all('.company').count.should eql expected_companies
+  end
 
   private
 
