@@ -39,7 +39,7 @@ describe "Empresas chachis" do
     create_company_with_keyword(["Ruby", "Sinatra"])
     create_company_with_keyword(["PHP", "Symfony"])
 
-    visit '/?keyword=ruby'
+    visit '/ruby'
 
     page.all('.company').count.should eql expected_companies
   end

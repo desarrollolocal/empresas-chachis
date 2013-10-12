@@ -14,9 +14,8 @@ class MyApp < Sinatra::Base
     set :mongo_db, conn.db('empresaschachis_test')
   end
 
-  get '/' do
+  get '/:keyword?' do |keyword|
     provider  = CompanyProvider.new(settings.mongo_db)
-    keyword = params[:keyword]
     companies = provider.find_hiring(keyword)
 
     haml :index, :format => :html5, :locals => { :companies => companies } 
