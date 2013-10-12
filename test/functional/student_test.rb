@@ -31,7 +31,7 @@ describe "Empresas chachis" do
 
     visit '/'
 
-    page.all('.company .tag').count.should eql keywords.count
+    page.all('.company .keyword').count.should eql keywords.count
   end
 
   it "filter companies by keyword" do
