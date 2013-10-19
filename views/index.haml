@@ -11,4 +11,6 @@
         %li
           =company['email']
       - if company['keywords']
-        =company['keywords'].join(', ')
+        %ul
+          -company['keywords'].each do |keyword|
+            %span.label.label-primary.keyword= keyword
