@@ -1,6 +1,5 @@
 require 'rspec'
-
-require_relative '../../lib/company_filters'
+require 'company_filters'
 
 describe 'CompanyFilters' do
 

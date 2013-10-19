@@ -1,5 +1,5 @@
-require_relative '../lib/company'
-require_relative '../lib/company_filters'
+require 'company'
+require 'company_filters'
 
 class CompanyProvider
   def initialize(database)

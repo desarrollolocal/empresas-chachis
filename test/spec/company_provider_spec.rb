@@ -1,6 +1,5 @@
 require 'rspec'
-
-require_relative '../../lib/company_provider'
+require 'company_provider'
 
 describe 'CompanyProvider' do
   before(:each) do

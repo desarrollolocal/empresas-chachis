@@ -1,0 +1,14 @@
+database:
+  development:
+    name: empresas_chachis_development
+    host: localhost
+    port: 27017
+    user: ~
+    pass: ~
+
+  test:
+    name: empresas_chachis_test
+    host: localhost
+    port: 27017
+    user: ~
+    pass: ~

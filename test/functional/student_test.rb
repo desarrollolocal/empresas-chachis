@@ -1,4 +1,4 @@
-require_relative '../../app'
+require_relative '../test_helper'
 require 'rspec'
 require 'capybara'
 require 'mongo'
@@ -11,7 +11,8 @@ describe "Empresas chachis" do
 
   before do
     Capybara.app = MyApp.new
-    @database = MongoClient.new("localhost", 27017).db("empresaschachis_test")
+    database_settings = MyApp.settings.database
+    @database = MongoClient.new(database_settings['host'], database_settings['port']).db(database_settings['name'])
     @database.collection("companies").drop
     @companies_collection = @database.collection("companies")
   end

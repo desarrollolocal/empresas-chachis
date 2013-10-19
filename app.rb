@@ -1,17 +1,22 @@
+$: << File.join(File.dirname(__FILE__), 'lib')
+ENV['RACK_ENV'] ||= 'development'
+
 require 'sinatra/base'
+require 'sinatra/config_file'
 require 'json'
 require 'mongo'
 require 'json/ext'
-
-require_relative 'lib/company_provider.rb'
+require 'company_provider'
 
 class MyApp < Sinatra::Base
-
+  register Sinatra::ConfigFile
   include Mongo
 
+  config_file './config/config.yml'
+
   configure do
-    conn = MongoClient.new("localhost", 27017)
-    set :mongo_db, conn.db('empresaschachis_test')
+    conn = MongoClient.new(settings.database['host'], settings.database['port'])
+    set :mongo_db, conn.db(settings.database['name'])
   end
 
   get '/:keyword?' do |keyword|
