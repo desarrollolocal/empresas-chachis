@@ -23,7 +23,7 @@ class MyApp < Sinatra::Base
     provider  = CompanyProvider.new(settings.mongo_db)
     companies = provider.find_hiring(keyword)
 
-    haml :index, :format => :html5, :locals => { :companies => companies } 
+    haml :list, :format => :html5, :locals => { :companies => companies } 
   end
 
 end
