@@ -4,4 +4,9 @@
     %title Empresas Chachis
     %link{ :rel => 'stylesheet', :href => '/vendor/bootstrap/css/bootstrap.min.css' }
   %body
-    = yield(:body)
+    %div.container
+      %div.jumbotron
+        %h1 Empresas chachis
+        %p Porque hay mejores maneras de empezar
+
+      = yield(:body)

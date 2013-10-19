@@ -1,11 +1,14 @@
-%ul
+%div.list-group
   - companies.each do |company|
-    %li.company
-      %span= "Nombre #{company['name']}"
-      %span= "Direccion #{company['address']}"
-      %span= "Web #{company['website']}"
-      %img{:src => company['logo'], :alt => company['logo']}
-      %span= "email #{company['email']}"
+    %div.list-group-item.company
+      %h4
+        %a{ :href => company['website'], :absolute => true }= company['name']
       %ul
-        - company['keywords'].each do |keyword|
-          %li.keyword= keyword
+      - if company['address']
+        %li
+          =company['address']
+      - if company['email']
+        %li
+          =company['email']
+      - if company['keywords']
+        =company['keywords'].join(', ')
