@@ -27,8 +27,7 @@ class MyApp < Sinatra::Base
   end
 
   post '/register-company' do
-    @collection = settings.mongo_db.collection 'companies'
-    @collection.insert({'name' => params['name'], 'email' => params['email'], 'website' => params['website']})
+    company_provider.create(params)
     redirect '/register-company'
   end
 
@@ -40,14 +39,19 @@ class MyApp < Sinatra::Base
   private
 
   def companies(keyword)
-    provider  = CompanyProvider.new(settings.mongo_db)
-    provider.find_hiring(keyword)
+    company_provider.find_hiring(keyword)
   end
 
   def keywords
-    provider  = KeywordProvider.new(settings.mongo_db)
-    provider.find_from_hiring_companies()
+    keyword_provider.find_from_hiring_companies()
   end
 
+  def company_provider
+    provider ||= CompanyProvider.new(settings.mongo_db)
+  end
+
+  def keyword_provider
+    provider ||= KeywordProvider.new(settings.mongo_db)
+  end
 
 end
