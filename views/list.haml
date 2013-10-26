@@ -1,6 +1,6 @@
-%div.list-group
+%ul.list-group
   - companies.each do |company|
-    %div.list-group-item.company
+    %li.list-group-item.company
       %h4
         %a{ :href => company['website'], :absolute => true }= company['name']
       %ul
