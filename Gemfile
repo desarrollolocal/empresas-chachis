@@ -1,6 +1,7 @@
 source "http://rubygems.org"
 gem "sinatra"
 gem "sinatra-contrib"
+gem "sinatra-partial"
 gem "mongo"
 gem "bson_ext"
 gem "json"

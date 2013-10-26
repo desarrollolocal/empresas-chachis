@@ -3,6 +3,7 @@ ENV['RACK_ENV'] ||= 'development'
 
 require 'sinatra/base'
 require 'sinatra/config_file'
+require 'sinatra/partial'
 require 'json'
 require 'mongo'
 require 'json/ext'
@@ -11,6 +12,7 @@ require 'keyword_provider'
 
 class MyApp < Sinatra::Base
   register Sinatra::ConfigFile
+  register Sinatra::Partial
   include Mongo
 
   config_file './config/config.yml'

@@ -11,11 +11,9 @@
       - if company['keywords']
         %ul
           -company['keywords'].each do |keyword|
-            %a{ :href => "/#{keyword}" }
-              %span.label.label-primary.keyword= keyword
-
+            = partial :keyword, :locals => { :keyword => keyword }
 
 %ul.keywords
   - keywords.each do |keyword|
     %li.keyword
-      %a{ :href => "/#{keyword}" }= keyword
+      = partial :keyword, :locals => { :keyword => keyword }
