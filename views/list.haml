@@ -4,16 +4,17 @@
       %h4
         %a{ :href => company['website'], :absolute => true }= company['name']
       %ul
-      - if company['address']
-        %li= company['address']
-      - if company['email']
-        %li= company['email']
-      - if company['keywords']
-        %ul
-          -company['keywords'].each do |keyword|
-            = partial :keyword, :locals => { :keyword => keyword }
+        - if company['address']
+          %li= company['address']
+        - if company['email']
+          %li= company['email']
+        - if company['keywords']
+          %li
+            -company['keywords'].each do |keyword|
+              = partial :keyword, :locals => { :keyword => keyword }
 
-%ul.keywords
-  - keywords.each do |keyword|
-    %li.keyword
-      = partial :keyword, :locals => { :keyword => keyword }
+%div.list-group
+  %ul.list-group-item.keywords
+    - keywords.each do |keyword|
+      %li
+        = partial :keyword, :locals => { :keyword => keyword }
