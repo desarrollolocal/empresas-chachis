@@ -13,7 +13,8 @@ class CompanyProvider
     find_by(filters)
   end
 
-  private 
+
+  private
 
   def find_by(filters)
     documents = @collection.find(filters).to_a

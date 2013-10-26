@@ -17,6 +17,7 @@ describe "Empresas chachis" do
     @companies_collection = @database.collection("companies")
   end
 
+
   it "shows all the companies hiring currently" do
     expected_companies = 3
     expected_companies.times do |i| create_company(i) end
@@ -25,6 +26,7 @@ describe "Empresas chachis" do
 
     page.all('.company').count.should eql expected_companies
   end
+
 
   it "shows companies keywords" do
     keywords = ["Ruby", "Sinatra"]
@@ -35,6 +37,7 @@ describe "Empresas chachis" do
     page.all('.company .keyword').count.should eql keywords.count
   end
 
+
   it "filter companies by keyword" do
     expected_companies = 1
     create_company_with_keyword(["Ruby", "Sinatra"])
@@ -44,6 +47,17 @@ describe "Empresas chachis" do
 
     page.all('.company').count.should eql expected_companies
   end
+
+
+  it "shows the current keywords" do
+    create_company_with_keyword(["Ruby", "Sinatra"])
+    create_company_with_keyword(["PHP", "Ruby"])
+
+    visit '/'
+
+    page.all('.keywords .keyword').count.should eql 3
+  end
+
 
   private
 

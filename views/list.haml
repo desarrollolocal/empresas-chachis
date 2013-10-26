@@ -14,3 +14,9 @@
         %ul
           -company['keywords'].each do |keyword|
             %span.label.label-primary.keyword= keyword
+
+
+%ul.keywords
+  - keywords.each do |keyword|
+    %li.keyword
+      =keyword['name']

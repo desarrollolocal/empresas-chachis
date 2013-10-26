@@ -7,6 +7,7 @@ require 'json'
 require 'mongo'
 require 'json/ext'
 require 'company_provider'
+require 'keyword_provider'
 
 class MyApp < Sinatra::Base
   register Sinatra::ConfigFile
@@ -21,9 +22,10 @@ class MyApp < Sinatra::Base
 
   get '/:keyword?' do |keyword|
     provider  = CompanyProvider.new(settings.mongo_db)
+    keywords = KeywordProvider.new(settings.mongo_db).find_all
     companies = provider.find_hiring(keyword)
 
-    haml :list, :format => :html5, :locals => { :companies => companies } 
+    haml :list, :format => :html5, :locals => { :companies => companies, :keywords => keywords } 
   end
 
 end
