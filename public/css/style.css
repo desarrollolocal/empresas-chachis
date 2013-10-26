@@ -1,0 +1,41 @@
+@import url(http://fonts.googleapis.com/css?family=Lato:100,300,400,700,900,300italic,400italic);
+body {
+  font-family: "Lato", sans-serif;
+  font-weight: 400;
+  background: #f2f2f4;
+}
+body input, body textarea {
+  font-family: "Lato", sans-serif;
+  font-weight: 300;
+}
+
+
+.brand {
+  font-weight: 900;
+  font-size: 30px;
+  line-height: 30px;
+  padding: 25.5px 20px 29.5px;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.light {
+  font-weight: 300;
+}
+
+.wrapper {
+  background: white;
+  margin: 40px auto;
+  width: 90%;
+  max-width: 1250px;
+  overflow: hidden;
+  border: 1px solid white;
+  border-color: rgba(255, 255, 255, 0.5);
+  -webkit-box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3), 0px 0px 10px rgba(0, 0, 0, 0.1) inset;
+  -moz-box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3), 0px 0px 10px rgba(0, 0, 0, 0.1) inset;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3), 0px 0px 10px rgba(0, 0, 0, 0.1) inset;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+

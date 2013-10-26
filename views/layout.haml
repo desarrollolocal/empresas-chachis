@@ -3,10 +3,13 @@
   %head
     %title Empresas Chachis
     %link{ :rel => 'stylesheet', :href => '/vendor/bootstrap/css/bootstrap.min.css' }
+    %link{ :rel => 'stylesheet', :href => '/css/style.css' }
   %body
-    %div.container
-      %div.jumbotron
-        %h1 Empresas chachis
-        %p Porque hay mejores maneras de empezar
+    %div.wrapper
+      %div.container
+        %div.brand
+          %span< EMPRESAS
+          %span{:class=>"light"}> CHACHIS
+          %p{:class=>"lead"} Hay mejores maneras de empezar
 
-      = yield(:body)
+        = yield(:body)
