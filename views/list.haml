@@ -5,18 +5,17 @@
         %a{ :href => company['website'], :absolute => true }= company['name']
       %ul
       - if company['address']
-        %li
-          =company['address']
+        %li= company['address']
       - if company['email']
-        %li
-          =company['email']
+        %li= company['email']
       - if company['keywords']
         %ul
           -company['keywords'].each do |keyword|
-            %span.label.label-primary.keyword= keyword
+            %a{ :href => "/#{keyword}" }
+              %span.label.label-primary.keyword= keyword
 
 
 %ul.keywords
   - keywords.each do |keyword|
     %li.keyword
-      =keyword['name']
+      %a{ :href => "/#{keyword}" }= keyword
