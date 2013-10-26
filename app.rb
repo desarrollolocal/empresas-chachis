@@ -22,6 +22,16 @@ class MyApp < Sinatra::Base
     set :mongo_db, conn.db(settings.database['name'])
   end
 
+  get '/register-company' do
+    haml :register_company, :format => :html5
+  end
+
+  post '/register-company' do
+    @collection = settings.mongo_db.collection 'companies'
+    @collection.insert({'name' => params['name'], 'email' => params['email'], 'website' => params['website']})
+    redirect '/register-company'
+  end
+
   get '/:keyword?' do |keyword|
     haml :list, :format => :html5, :locals => { :companies => companies(keyword), :keywords => keywords }
   end

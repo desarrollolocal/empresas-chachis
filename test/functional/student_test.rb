@@ -6,7 +6,7 @@ require 'json/ext'
 
 include Mongo
 
-describe "Empresas chachis" do
+describe "Empresas chachis for students" do
   include Capybara::DSL
 
   before do
