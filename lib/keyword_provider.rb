@@ -1,5 +1,3 @@
-require 'company'
-
 class KeywordProvider
 
   def initialize(database)
