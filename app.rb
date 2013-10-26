@@ -24,7 +24,7 @@ class MyApp < Sinatra::Base
 
   get '/:keyword?' do |keyword|
     provider  = CompanyProvider.new(settings.mongo_db)
-    keywords = KeywordProvider.new(settings.mongo_db).find_all
+    keywords = KeywordProvider.new(settings.mongo_db).find_from_hiring_companies
     companies = provider.find_hiring(keyword)
 
     haml :list, :format => :html5, :locals => { :companies => companies, :keywords => keywords } 

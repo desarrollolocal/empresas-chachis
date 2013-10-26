@@ -4,8 +4,8 @@ class KeywordProvider
     @collection = database.collection 'companies'
   end
 
-  def find_all
-    companies = @collection.find
+  def find_from_hiring_companies
+    companies = @collection.find({ "hiring" => true })
     keywords = []
     companies.each do |company|
       company['keywords'].each do |keyword|
