@@ -13,4 +13,21 @@ describe 'KeywordProvider' do
 
     @keyword_provider.find_from_hiring_companies
   end
+
+  it 'returns a map of keyword appearances' do
+    @collection.stub(:find).with({ 'hiring' => true }).and_return([a_company, a_company]);
+
+    keywords = @keyword_provider.find_from_hiring_companies
+
+    expect(keywords['key1']).to eql 2
+    expect(keywords['not found']).to be_nil
+  end
+
+
+  private
+
+  def a_company
+    Company.new('a_name', 'an_address', 'a_website', 'a_logo', 'an_email', ['key1'])
+  end
+
 end

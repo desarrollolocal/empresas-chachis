@@ -5,13 +5,20 @@ class KeywordProvider
   end
 
   def find_from_hiring_companies
-    companies = @collection.find({ "hiring" => true })
-    keywords = []
-    companies.each do |company|
-      company['keywords'].each do |keyword|
-        keywords << keyword
-      end
+    keywords = {}
+    all_keywords.each do |keyword|
+        keywords[keyword] = 0 if keywords[keyword].nil?
+        keywords[keyword]= keywords[keyword] +1
     end
-    keywords.uniq
+
+    return keywords
   end
+
+  private
+
+  def all_keywords
+    companies = @collection.find({ "hiring" => true })
+    companies.map {|company| company['keywords'] }.flatten
+  end
+
 end

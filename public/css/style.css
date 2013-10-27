@@ -9,6 +9,12 @@ body input, body textarea {
   font-weight: 300;
 }
 
+.discover-title {
+  font-weight: 300;
+  font-size: 20px;
+  line-height: 30px;
+}
+
 
 .brand {
   font-weight: 900;
