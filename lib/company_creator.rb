@@ -1,3 +1,5 @@
+require 'mail'
+
 class CompanyCreator
 
   def initialize(database)
@@ -5,7 +7,19 @@ class CompanyCreator
   end
 
   def create(params)
-    @collection.insert(prepare_insert(params))
+    id = @collection.insert(prepare_insert(params))
+
+    company = Company.new(params['name'], params['address'], params['website'],
+      params['logo'], params['email'], params['keywords'], params['description'], id.to_s)
+
+    Mail.deliver do
+      to company.email
+      from 'sender@example.comt'
+      subject 'Confirma tu suscripcion'
+      body "esta es tu url #{company.id}"
+    end
+
+    company
   end
 
   private

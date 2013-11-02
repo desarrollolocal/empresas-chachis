@@ -1,2 +1,2 @@
-class Company < Struct.new(:name, :address, :website, :logo, :email, :keywords, :description)
+class Company < Struct.new(:name, :address, :website, :logo, :email, :keywords, :description, :id)
 end

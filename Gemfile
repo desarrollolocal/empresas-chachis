@@ -6,6 +6,7 @@ gem "mongo"
 gem "bson_ext"
 gem "json"
 gem "haml"
+gem "mail"
 
 #bundle install --without test development
 group :test do
