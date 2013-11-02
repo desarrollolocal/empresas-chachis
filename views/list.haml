@@ -1,20 +1,32 @@
-%div.list-group
-  - companies.each do |company|
-    %div.list-group-item.company
-      %h4
-        %a{ :href => company['website'], :absolute => true }= company['name']
-      %ul
-        - if company['address']
-          %li= company['address']
-        - if company['email']
-          %li= company['email']
-        - if company['keywords']
-          %li
-            -company['keywords'].each do |keyword|
-              = partial :keyword, :locals => { :keyword => keyword }
+%div.row
+  %div.col-sm-9
 
-%div.list-group
-  %ul.list-group-item.keywords
-    - keywords.each do |keyword|
-      %li
-        = partial :keyword, :locals => { :keyword => keyword }
+    %span Mapa de pequeñas* empresas de desarrollo de software en Valencia, diseñado para personas
+    sin experiencia en la industria que quieran empezar por un camino alternativo a las grandes corporaciones.
+    *hasta 20 empleados
+
+    ¿Eres una pequeña empresa de IT? Apúntate
+
+    %ul.list-group
+      - companies.each do |company|
+        %li.list-group-item.company
+          %h4
+            %a{ :href => company['website'], :absolute => true }= company['name']
+          %ul
+            - if company['address']
+              %li= company['address']
+            - if company['email']
+              %li= company['email']
+            - if company['keywords']
+              %li
+                -company['keywords'].each do |keyword, value|
+                  %a.keyword{ :href => "/#{keyword}" }
+                    %span.label.label-primary= keyword
+
+  %div.col-xs-3
+    %span.discover-title ETIQUETAS
+
+    %ul.keywords
+      - keywords.each do |keyword, value|
+        %li
+          = partial :keyword, :locals => { :keyword => keyword, :count => value }

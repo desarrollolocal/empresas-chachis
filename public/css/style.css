@@ -9,6 +9,12 @@ body input, body textarea {
   font-weight: 300;
 }
 
+.discover-title {
+  font-weight: 300;
+  font-size: 20px;
+  line-height: 30px;
+}
+
 
 .brand {
   font-weight: 900;
@@ -39,3 +45,12 @@ body input, body textarea {
   box-sizing: border-box;
 }
 
+
+h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
+  font-family: "Lato", sans-serif;
+  font-weight: 400;
+}
+
+ul{
+  list-style-type: none;
+}
