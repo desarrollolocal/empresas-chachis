@@ -8,6 +8,7 @@ require 'json'
 require 'mongo'
 require 'json/ext'
 require 'company_provider'
+require 'company_creator'
 require 'keyword_provider'
 
 class MyApp < Sinatra::Base
@@ -27,7 +28,7 @@ class MyApp < Sinatra::Base
   end
 
   post '/register-company' do
-    company_provider.create(params)
+    company_creator.create(params)
     redirect '/register-company'
   end
 
@@ -48,6 +49,10 @@ class MyApp < Sinatra::Base
 
   def company_provider
     provider ||= CompanyProvider.new(settings.mongo_db)
+  end
+
+  def company_creator
+    creator ||= CompanyCreator.new(settings.mongo_db)
   end
 
   def keyword_provider

@@ -13,11 +13,6 @@ class CompanyProvider
     find_by(filters)
   end
 
-
-  def create(params)
-    @collection.insert({'name' => params['name'], 'email' => params['email'], 'website' => params['website']})
-  end
-
   private
 
   def find_by(filters)
