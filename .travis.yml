@@ -1,12 +1,11 @@
 language: ruby
 rvm:
   - 2.0.0
-env:
-  - DB=mongodb
+services:
+  - mongodb
 script:
   - bundle exec rake test:all
 notifications:
   email:
     - vibaiher@gmail.com
     - carlescliment@gmail.com
-    - mike@becodemyfriend.com
