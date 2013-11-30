@@ -1,10 +1,4 @@
 require_relative '../test_helper'
-require 'rspec'
-require 'capybara'
-require 'mongo'
-require 'json/ext'
-
-include Mongo
 
 describe "Empresas chachis for students" do
   include Capybara::DSL

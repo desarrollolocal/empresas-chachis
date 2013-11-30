@@ -7,9 +7,9 @@ class CompanyProvider
   end
 
   def find_hiring(keyword = nil)
-    filters = default_filters
-    filters.add_keyword(keyword) unless keyword.nil?
-
+    filters = { 'hiring' => true }
+    filters['keywords'] = /^#{keyword}$/i unless keyword.nil?
+    
     find_by(filters)
   end
 
@@ -28,13 +28,6 @@ class CompanyProvider
 
   def build_new_company(attributes)
     Company.new(attributes['name'], attributes['address'], attributes['website'], attributes['logo'], attributes['email'], attributes['keywords'])
-  end
-
-  def default_filters
-    company_filters = CompanyFilters.new
-    company_filters.add("hiring", true)
-
-    return company_filters
   end
 
 end

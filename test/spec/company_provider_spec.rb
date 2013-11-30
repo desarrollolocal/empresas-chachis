@@ -9,32 +9,20 @@ describe 'CompanyProvider' do
   end
 
   it 'filters hiring companies' do
-    filters = double('CompanyFilters')
-    CompanyFilters.should_receive(:new).and_return(filters)
+    expected_filters = { 'hiring' => true }
 
-    filters.should_receive(:add).with('hiring', true);
+    @collection.should_receive(:find).with(expected_filters);
 
     @company_provider.find_hiring
   end
 
-  it 'filters hiring companies by keyword' do
+  it 'allows filtering by keyword' do
     keyword = 'ruby'
-    filter_mock = double('CompanyFilters')
-    @company_provider.stub(:default_filters).and_return(filter_mock)
+    expected_filters = { 'hiring' => true, 'keywords' => /^#{keyword}$/i }
 
-    filter_mock.should_receive(:add_keyword).with(keyword)
+    @collection.should_receive(:find).with(expected_filters);
 
     companies = @company_provider.find_hiring(keyword)
-  end
-
-  it 'queries the database with the filters built' do
-    companies = [{}, {}]
-    @collection.should_receive(:find) do |filters|
-      expect(filters.class).to eql CompanyFilters
-    end
-    .and_return(companies)
-
-    @company_provider.find_hiring
   end
 
 end

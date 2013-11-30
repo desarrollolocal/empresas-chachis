@@ -14,7 +14,6 @@ describe 'CompanyCreator' do
     @company_creator = CompanyCreator.new(@database)
 
     Mail::TestMailer.deliveries.clear
-
   end
 
   it "newly created companies are hiring" do
