@@ -1,0 +1,12 @@
+language: ruby
+rvm:
+  - 1.9.3
+env:
+  - DB=mongodb
+script:
+  - bundle exec rake test:all
+notifications:
+  email:
+    - vibaiher@gmail.com
+    - carlescliment@gmail.com
+    - mike@becodemyfriend.com
