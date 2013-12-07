@@ -56,11 +56,11 @@ describe "Empresas chachis for students" do
   private
 
   def create_company (name)
-    @companies_collection.insert({ "name" => "Company #{name}", "hiring" => true , "keywords" => [] })
+    @companies_collection.insert({ "confirmed" => true, "name" => "Company #{name}", "hiring" => true , "keywords" => [] })
   end
 
   def create_company_with_keyword(keywords)
-    @companies_collection.insert({ "name" => "Company name", "hiring" => true, "keywords" => keywords })
+    @companies_collection.insert({ "confirmed" => true, "name" => "Company name", "hiring" => true, "keywords" => keywords })
   end
 
 end
