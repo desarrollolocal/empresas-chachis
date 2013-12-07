@@ -40,15 +40,11 @@ class MyApp < Sinatra::Base
   end
 
   get '/:keyword?' do |keyword|
-    haml :list, :format => :html5, :locals => { :companies => get_companies(keyword), :keywords => keywords }
+    haml :list, :format => :html5, :locals => { :companies => companies.find_hiring(keyword), :keywords => keywords }
   end
 
 
   private
-
-  def get_companies(keyword)
-    companies.find_hiring(keyword)
-  end
 
   def companies
     Companies.new(settings.mongo_db)
