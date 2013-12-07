@@ -1,4 +1,4 @@
-class KeywordProvider
+class Keywords
 
   def initialize(database)
     @collection = database.collection 'companies'
