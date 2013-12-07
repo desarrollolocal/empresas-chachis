@@ -27,6 +27,7 @@ class CompanyCreator
   def prepare_insert(params)
     data = {'name' => params['name'], 'email' => params['email'], 'website' => params['website']}
     data["hiring"] = true
+    data["verified"] = false
     data
   end
 end

@@ -16,9 +16,9 @@ describe 'CompanyCreator' do
     Mail::TestMailer.deliveries.clear
   end
 
-  it "newly created companies are hiring" do
+  it "newly created companies are hiring and unverified" do
     company_data = {'name' => '', 'email' => 'a_mail@web.com', 'website' => ''}
-    expected_insert_data = {'name' => '', 'email' => 'a_mail@web.com', 'website' => '', 'hiring' => true}
+    expected_insert_data = {'name' => '', 'email' => 'a_mail@web.com', 'website' => '', 'hiring' => true, 'verified' => false}
 
     @collection.should_receive(:insert).with(expected_insert_data)
 
@@ -33,7 +33,6 @@ describe 'CompanyCreator' do
 
     should have_sent_email.to('hello@company.com')
     should have_sent_email.matching_body(/#{company.id}/)
-
   end
 
 end
