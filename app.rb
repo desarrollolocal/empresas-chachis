@@ -8,7 +8,6 @@ require 'json'
 require 'mongo'
 require 'json/ext'
 require 'companies'
-require 'company_provider'
 require 'company_creator'
 require 'keyword_provider'
 require 'verification_url_builder'
@@ -43,17 +42,17 @@ class MyApp < Sinatra::Base
   end
 
   get '/:keyword?' do |keyword|
-    haml :list, :format => :html5, :locals => { :companies => companies(keyword), :keywords => keywords }
+    haml :list, :format => :html5, :locals => { :companies => get_companies(keyword), :keywords => keywords }
   end
 
 
   private
 
-  def companies(keyword)
-    company_provider.find_hiring(keyword)
+  def get_companies(keyword)
+    companies.find_hiring(keyword)
   end
 
-  def companies_collection
+  def companies
     Companies.new(settings.mongo_db)
   end
 
@@ -70,7 +69,7 @@ class MyApp < Sinatra::Base
   end
 
   def company_creator
-    creator ||= CompanyCreator.new(companies_collection, verification_url_builder)
+    creator ||= CompanyCreator.new(companies, verification_url_builder)
   end
 
   def keyword_provider

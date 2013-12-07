@@ -24,4 +24,21 @@ describe 'Companies' do
 
     expect(@companies.insert({})).to eql anId
   end
+
+  it 'filters hiring companies' do
+    expected_filters = { 'hiring' => true }
+
+    @collection.should_receive(:find).with(expected_filters);
+
+    @companies.find_hiring
+  end
+
+  it 'allows filtering by keyword' do
+    keyword = 'ruby'
+    expected_filters = { 'hiring' => true, 'keywords' => /^#{keyword}$/i }
+
+    @collection.should_receive(:find).with(expected_filters);
+
+    @companies.find_hiring(keyword)
+  end
 end
