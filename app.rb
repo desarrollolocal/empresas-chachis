@@ -34,9 +34,7 @@ class MyApp < Sinatra::Base
   end
 
   get '/verify-company/:id' do |id|
-    collection = settings.mongo_db.collection('companies')
-    object_id = BSON::ObjectId(id)
-    collection.update({'_id' => object_id}, {"$set" => {'verified' => true}})
+    companies.update(id, {'verified' => true})
 
     redirect '/'
   end

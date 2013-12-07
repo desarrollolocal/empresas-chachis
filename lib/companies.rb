@@ -17,6 +17,11 @@ class Companies
     find_by(filters)
   end
 
+  def update(id, company_data)
+    object_id = BSON::ObjectId(id)
+    @collection.update({'_id' => object_id}, {"$set" => company_data})
+  end
+
   private
 
   def find_by(filters)

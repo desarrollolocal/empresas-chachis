@@ -1,7 +1,10 @@
 require 'rspec'
 require 'companies'
+require 'json/ext'
+require 'mongo'
 
 describe 'Companies' do
+  include Mongo
 
   before(:each) do
     @collection = double('Collection', :insert => nil)
@@ -40,5 +43,14 @@ describe 'Companies' do
     @collection.should_receive(:find).with(expected_filters);
 
     @companies.find_hiring(keyword)
+  end
+
+  it 'updates companies by id' do
+    id = '52a30e62cea0997526000001'
+    updated_fields = { 'hiring' => false, 'verified' => true }
+
+    @collection.should_receive(:update).with({'_id' => BSON::ObjectId(id)}, {'$set' => updated_fields});
+
+    @companies.update(id, updated_fields)
   end
 end
