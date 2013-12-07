@@ -9,7 +9,7 @@ class CompanyProvider
   def find_hiring(keyword = nil)
     filters = { 'hiring' => true }
     filters['keywords'] = /^#{keyword}$/i unless keyword.nil?
-    
+
     find_by(filters)
   end
 
