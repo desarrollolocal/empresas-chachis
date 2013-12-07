@@ -27,7 +27,7 @@ describe 'KeywordProvider' do
   private
 
   def a_company
-    Company.new('a_name', 'an_address', 'a_website', 'a_logo', 'an_email', ['key1'])
+    Company.new('id', 'a_name', 'an_address', 'a_website', 'a_logo', 'an_email', ['key1'])
   end
 
 end

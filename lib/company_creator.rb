@@ -8,10 +8,7 @@ class CompanyCreator
   end
 
   def create(params)
-    id = @companies.insert(prepare_insert(params))
-    company = Company.new(params['name'], params['address'], params['website'],
-      params['logo'], params['email'], params['keywords'], params['description'], id.to_s)
-
+    company = @companies.insert(prepare_insert(params))
     url = @url_builder.build(company)
 
     Mail.deliver do

@@ -20,7 +20,7 @@ describe 'CompanyCreator' do
     company_data = {'name' => '', 'email' => 'a_mail@web.com', 'website' => ''}
     expected_insert_data = {'name' => '', 'email' => 'a_mail@web.com', 'website' => '', 'hiring' => true, 'verified' => false}
 
-    @companies.should_receive(:insert).with(expected_insert_data)
+    @companies.should_receive(:insert).with(expected_insert_data).and_return(a_company)
 
     @company_creator.create(company_data);
   end
@@ -28,12 +28,10 @@ describe 'CompanyCreator' do
 
   it "builds a unique verification url" do
     company_data = {'email' => 'hello@company.com'}
-    unique_id = '238u21890312'
-    @companies.stub(:insert).and_return(unique_id)
+    company = a_company
+    @companies.stub(:insert).and_return(company)
 
-    @verification_url_builder.should_receive('build') do |company|
-      expect(company.class).to be Company
-    end
+    @verification_url_builder.should_receive('build').with(company)
 
     @company_creator.create(company_data)
   end
@@ -41,12 +39,18 @@ describe 'CompanyCreator' do
 
   it "sends an verification email when a new company is created" do
     expected_url = 'http:://verification-link'
+    company = a_company
+    @companies.should_receive(:insert).and_return(company)
     @verification_url_builder.stub(:build).and_return(expected_url)
 
-    company = @company_creator.create({'name' => '', 'email' => 'hello@company.com', 'website' => ''});
+    @company_creator.create({'name' => '', 'email' => 'hello@company.com', 'website' => ''});
 
-    should have_sent_email.to('hello@company.com')
+    should have_sent_email.to(company.email)
     should have_sent_email.matching_body(/#{expected_url}/)
+  end
+
+  def a_company
+    double('Company', {'email' => 'bartolo@guapo.es'})
   end
 
 end

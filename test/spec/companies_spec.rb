@@ -20,12 +20,8 @@ describe 'Companies' do
     @companies.insert(company_data)
   end
 
-  it "returns the mongo id" do
-    anId = 78321321;
-
-    @collection.should_receive(:insert).and_return(anId)
-
-    expect(@companies.insert({})).to eql anId
+  it "returns the company instance when inserting" do
+    expect(@companies.insert({}).class).to be Company
   end
 
   it 'filters hiring companies' do

@@ -7,7 +7,16 @@ class Companies
   end
 
   def insert(company_data)
-    @collection.insert(company_data)
+    id = @collection.insert(company_data)
+    Company.new(id.to_s,
+                company_data['name'],
+                company_data['address'],
+                company_data['website'],
+                company_data['logo'],
+                company_data['email'],
+                company_data['keywords'],
+                company_data['description'],
+                )
   end
 
   def find_hiring(keyword = nil)
