@@ -40,7 +40,11 @@ class MyApp < Sinatra::Base
   end
 
   get '/:keyword?' do |keyword|
-    haml :list, :format => :html5, :locals => { :companies => companies.find_hiring(keyword), :keywords => keywords }
+    locals = {
+      :companies => companies.find_hiring(keyword),
+      :keywords => keyword_provider.find_from_hiring_companies()
+    }
+    haml :list, :format => :html5, :locals => locals
   end
 
 
@@ -48,14 +52,6 @@ class MyApp < Sinatra::Base
 
   def companies
     Companies.new(settings.mongo_db)
-  end
-
-  def keywords
-    keyword_provider.find_from_hiring_companies()
-  end
-
-  def company_provider
-    provider ||= CompanyProvider.new(settings.mongo_db)
   end
 
   def verification_url_builder
