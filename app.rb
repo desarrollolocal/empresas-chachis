@@ -7,6 +7,7 @@ require 'sinatra/partial'
 require 'json'
 require 'mongo'
 require 'json/ext'
+require 'companies'
 require 'company_provider'
 require 'company_creator'
 require 'keyword_provider'
@@ -52,6 +53,10 @@ class MyApp < Sinatra::Base
     company_provider.find_hiring(keyword)
   end
 
+  def companies_collection
+    Companies.new(settings.mongo_db)
+  end
+
   def keywords
     keyword_provider.find_from_hiring_companies()
   end
@@ -65,7 +70,7 @@ class MyApp < Sinatra::Base
   end
 
   def company_creator
-    creator ||= CompanyCreator.new(settings.mongo_db, verification_url_builder)
+    creator ||= CompanyCreator.new(companies_collection, verification_url_builder)
   end
 
   def keyword_provider

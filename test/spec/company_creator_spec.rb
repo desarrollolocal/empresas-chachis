@@ -9,10 +9,9 @@ end
 describe 'CompanyCreator' do
   include Mail::Matchers
   before(:each) do
-    @collection = double('Collection', :find => {}, :insert => 7380321)
-    @database = double("Database", :collection => @collection)
+    @companies = double("Companies", :insert => nil)
     @verification_url_builder = double("VerificationUrlBuilder", :build => '')
-    @company_creator = CompanyCreator.new(@database, @verification_url_builder)
+    @company_creator = CompanyCreator.new(@companies, @verification_url_builder)
 
     Mail::TestMailer.deliveries.clear
   end
@@ -21,7 +20,7 @@ describe 'CompanyCreator' do
     company_data = {'name' => '', 'email' => 'a_mail@web.com', 'website' => ''}
     expected_insert_data = {'name' => '', 'email' => 'a_mail@web.com', 'website' => '', 'hiring' => true, 'verified' => false}
 
-    @collection.should_receive(:insert).with(expected_insert_data)
+    @companies.should_receive(:insert).with(expected_insert_data)
 
     @company_creator.create(company_data);
   end
@@ -30,7 +29,7 @@ describe 'CompanyCreator' do
   it "builds a unique verification url" do
     company_data = {'email' => 'hello@company.com'}
     unique_id = '238u21890312'
-    @collection.stub(:insert).and_return(unique_id)
+    @companies.stub(:insert).and_return(unique_id)
 
     @verification_url_builder.should_receive('build') do |company|
       expect(company.class).to be Company

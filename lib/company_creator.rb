@@ -2,13 +2,13 @@ require 'mail'
 
 class CompanyCreator
 
-  def initialize(database, url_builder)
-    @collection = database.collection 'companies'
+  def initialize(companies, url_builder)
+    @companies = companies
     @url_builder = url_builder
   end
 
   def create(params)
-    id = @collection.insert(prepare_insert(params))
+    id = @companies.insert(prepare_insert(params))
     company = Company.new(params['name'], params['address'], params['website'],
       params['logo'], params['email'], params['keywords'], params['description'], id.to_s)
 
