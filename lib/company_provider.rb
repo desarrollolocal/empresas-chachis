@@ -27,7 +27,7 @@ class CompanyProvider
   end
 
   def build_new_company(attributes)
-    Company.new(attributes['name'], attributes['address'], attributes['website'], attributes['logo'], attributes['email'], attributes['keywords'])
+    Company.new(attributes['name'], attributes['address'], attributes['website'], attributes['logo'], attributes['email'], attributes['keywords'], attributes['verified'])
   end
 
 end

@@ -23,4 +23,13 @@ describe "Empresas chachis for companies" do
 
     @companies_collection.find.count.should eq expected_companies
   end
+
+  it "allows companies to verify" do
+    expected_companies = 1
+    id = @companies_collection.insert({'verified' => false})
+
+    visit "/verify-company/#{id}"
+
+    @companies_collection.find({'_id' => id, 'verified' => true}).count.should eq expected_companies
+  end
 end

@@ -33,6 +33,14 @@ class MyApp < Sinatra::Base
     redirect '/register-company'
   end
 
+  get '/verify-company/:id' do |id|
+    collection = settings.mongo_db.collection('companies')
+    object_id = BSON::ObjectId(id)
+    collection.update({'_id' => object_id}, {"$set" => {'verified' => true}})
+
+    redirect '/'
+  end
+
   get '/:keyword?' do |keyword|
     haml :list, :format => :html5, :locals => { :companies => companies(keyword), :keywords => keywords }
   end

@@ -9,7 +9,6 @@ class CompanyCreator
 
   def create(params)
     id = @collection.insert(prepare_insert(params))
-
     company = Company.new(params['name'], params['address'], params['website'],
       params['logo'], params['email'], params['keywords'], params['description'], id.to_s)
 
