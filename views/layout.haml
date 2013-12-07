@@ -12,4 +12,8 @@
           %span{:class=>"light"}> CHACHIS
           %p{:class=>"lead"} Hay mejores maneras de empezar
 
+        -if not flash.empty?
+          %div.flash
+            =styled_flash
+
         = yield(:body)

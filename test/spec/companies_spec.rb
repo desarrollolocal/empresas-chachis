@@ -25,7 +25,7 @@ describe 'Companies' do
   end
 
   it 'filters hiring companies' do
-    expected_filters = { 'hiring' => true, 'confirmed' => true }
+    expected_filters = { 'hiring' => true, 'verified' => true }
 
     @collection.should_receive(:find).with(expected_filters);
 
@@ -34,7 +34,7 @@ describe 'Companies' do
 
   it 'allows filtering by keyword' do
     keyword = 'ruby'
-    expected_filters = { 'hiring' => true, 'confirmed' => true, 'keywords' => /^#{keyword}$/i }
+    expected_filters = { 'hiring' => true, 'verified' => true, 'keywords' => /^#{keyword}$/i }
 
     @collection.should_receive(:find).with(expected_filters);
 

@@ -1,5 +1,6 @@
 source "http://rubygems.org"
 gem "sinatra"
+gem "sinatra-flash", "~> 0.3.0"
 gem "sinatra-contrib"
 gem "sinatra-partial"
 gem "mongo"

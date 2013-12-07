@@ -2,6 +2,7 @@ $: << File.join(File.dirname(__FILE__), 'lib')
 ENV['RACK_ENV'] ||= 'development'
 
 require 'sinatra/base'
+require 'sinatra/flash'
 require 'sinatra/config_file'
 require 'sinatra/partial'
 require 'json'
@@ -13,6 +14,8 @@ require 'company_creator'
 require 'verification_url_builder'
 
 class MyApp < Sinatra::Base
+  enable :sessions
+  register Sinatra::Flash
   register Sinatra::ConfigFile
   register Sinatra::Partial
   include Mongo
@@ -30,11 +33,13 @@ class MyApp < Sinatra::Base
 
   post '/register-company' do
     company_creator.create(params)
+
     redirect '/register-company'
   end
 
   get '/verify-company/:id' do |id|
     companies.update(id, {'verified' => true})
+    flash.next[:info] = "Gracias por verificar tu empresa."
 
     redirect '/'
   end
@@ -44,6 +49,7 @@ class MyApp < Sinatra::Base
       :companies => companies.find_hiring(keyword),
       :keywords => keywords.find_from_hiring_companies()
     }
+
     haml :list, :format => :html5, :locals => locals
   end
 
