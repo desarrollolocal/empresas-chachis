@@ -10,6 +10,7 @@ require 'json/ext'
 require 'company_provider'
 require 'company_creator'
 require 'keyword_provider'
+require 'verification_url_builder'
 
 class MyApp < Sinatra::Base
   register Sinatra::ConfigFile
@@ -51,8 +52,12 @@ class MyApp < Sinatra::Base
     provider ||= CompanyProvider.new(settings.mongo_db)
   end
 
+  def verification_url_builder
+    builder ||= VerificationUrlBuilder.new(request.host, '/verify-company')
+  end
+
   def company_creator
-    creator ||= CompanyCreator.new(settings.mongo_db)
+    creator ||= CompanyCreator.new(settings.mongo_db, verification_url_builder)
   end
 
   def keyword_provider

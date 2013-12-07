@@ -9,9 +9,10 @@ end
 describe 'CompanyCreator' do
   include Mail::Matchers
   before(:each) do
-    @collection = double('Collection', :find => {})
+    @collection = double('Collection', :find => {}, :insert => 7380321)
     @database = double("Database", :collection => @collection)
-    @company_creator = CompanyCreator.new(@database)
+    @verification_url_builder = double("VerificationUrlBuilder", :build => '')
+    @company_creator = CompanyCreator.new(@database, @verification_url_builder)
 
     Mail::TestMailer.deliveries.clear
   end
@@ -26,13 +27,27 @@ describe 'CompanyCreator' do
   end
 
 
-  it "sends an email when a new company is created with a unique id" do
-    @collection.stub(:insert).and_return("123mdfs5343ins")
+  it "builds a unique verification url" do
+    company_data = {'email' => 'hello@company.com'}
+    unique_id = '238u21890312'
+    @collection.stub(:insert).and_return(unique_id)
+
+    @verification_url_builder.should_receive('build') do |company|
+      expect(company.class).to be Company
+    end
+
+    @company_creator.create(company_data)
+  end
+
+
+  it "sends an verification email when a new company is created" do
+    expected_url = 'http:://verification-link'
+    @verification_url_builder.stub(:build).and_return(expected_url)
 
     company = @company_creator.create({'name' => '', 'email' => 'hello@company.com', 'website' => ''});
 
     should have_sent_email.to('hello@company.com')
-    should have_sent_email.matching_body(/#{company.id}/)
+    should have_sent_email.matching_body(/#{expected_url}/)
   end
 
 end

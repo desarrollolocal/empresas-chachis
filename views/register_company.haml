@@ -1,8 +1,8 @@
 %form{ :method => 'POST', :action => '/register-company' }
   %p
-    %input{ :type => 'text', :name => 'name' }
+    %input{ :type => 'text', :name => 'name', :required => true  }
   %p
-    %input{ :type => 'text', :name => 'email' }
+    %input{ :type => 'email', :name => 'email', :required => true }
   %p
     %input{ :type => 'text', :name => 'website' }
   %p

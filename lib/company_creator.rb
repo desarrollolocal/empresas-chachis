@@ -2,8 +2,9 @@ require 'mail'
 
 class CompanyCreator
 
-  def initialize(database)
+  def initialize(database, url_builder)
     @collection = database.collection 'companies'
+    @url_builder = url_builder
   end
 
   def create(params)
@@ -12,11 +13,13 @@ class CompanyCreator
     company = Company.new(params['name'], params['address'], params['website'],
       params['logo'], params['email'], params['keywords'], params['description'], id.to_s)
 
+    url = @url_builder.build(company)
+
     Mail.deliver do
       to company.email
       from 'sender@example.comt'
       subject 'Confirma tu suscripcion'
-      body "esta es tu url #{company.id}"
+      body "esta es tu url #{url}"
     end
 
     company
