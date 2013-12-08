@@ -7,16 +7,8 @@ class Companies
   end
 
   def insert(company_data)
-    id = @collection.insert(company_data)
-    Company.new(id.to_s,
-                company_data['name'],
-                company_data['address'],
-                company_data['website'],
-                company_data['logo'],
-                company_data['email'],
-                company_data['keywords'],
-                company_data['description'],
-                )
+    company_data['id'] = @collection.insert(company_data)
+    build_new_company(company_data)
   end
 
   def find_hiring(keyword = nil)
@@ -45,6 +37,14 @@ class Companies
   end
 
   def build_new_company(attributes)
-    Company.new(attributes['name'], attributes['address'], attributes['website'], attributes['logo'], attributes['email'], attributes['keywords'], attributes['verified'])
+    Company.new(attributes['id'].to_s,
+                attributes['name'],
+                attributes['address'],
+                attributes['website'],
+                attributes['logo'],
+                attributes['email'],
+                attributes['keywords'],
+                attributes['description'],
+                )
   end
 end
